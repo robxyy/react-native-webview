@@ -70,7 +70,7 @@ export default class WebView extends React.Component<WindowsWebViewProps, State>
   webViewRef = React.createRef<NativeWebViewWindows>();
 
   RnwVersionSupportsWebView2 = (version.major>1 || version.minor>=68);
-  
+
   RCTWebViewString = (this.RnwVersionSupportsWebView2 && this.props.useWebView2) ? 'RCTWebView2' : 'RCTWebView';
 
   goForward = () => {
@@ -86,6 +86,14 @@ export default class WebView extends React.Component<WindowsWebViewProps, State>
       this.getWebViewHandle(),
       UIManager.getViewManagerConfig(this.RCTWebViewString).Commands.goBack,
       undefined,
+    );
+  }
+
+  loadUrl = (url: string) => {
+    UIManager.dispatchViewManagerCommand(
+      this.getWebViewHandle(),
+      UIManager.getViewManagerConfig(this.RCTWebViewString).Commands.loadUrl,
+      [url],
     );
   }
 

@@ -104,6 +104,11 @@ const WebViewComponent = forwardRef<{}, MacOSWebViewProps>(({
   useImperativeHandle(ref, () => ({
     goForward: () => Commands.goForward(webViewRef.current),
     goBack: () => Commands.goBack(webViewRef.current),
+    loadUrl: (url: string) => {
+      setViewState(
+        'LOADING',
+      ); Commands.loadUrl(webViewRef.current, url)
+    },
     reload: () => {
       setViewState(
         'LOADING',
